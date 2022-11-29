@@ -1,8 +1,10 @@
-import './index.scss';
+import Board from "./components/Board";
 
 const Home = () => {
     return (
-        <div>Customer Database</div>
+        <div className="inner">
+            <Board />
+        </div>
     )
 }
 

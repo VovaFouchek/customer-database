@@ -38,5 +38,8 @@
 			"jsx": true
 		},
 		"ecmaVersion": 12
+	},
+	"env": {
+		"es6": true
 	}
 }
