@@ -1,20 +1,84 @@
 {
     "customers": [
         {
-            "id": 1,
-            "firstName": "test1",
-            "lastName": "string",
-            "email": "string",
-            "phone": "string",
-            "details": "string"
+            "id": "2EhdYxQUmh",
+            "firstName": "Sophia",
+            "lastName": "Stewart",
+            "email": "moreau.dominic@bedard.biz",
+            "phone": "(751) 819-1619",
+            "company": "Lemieux"
         },
         {
-            "id": 2,
-            "firstName": "test2",
-            "lastName": "string",
-            "email": "string",
-            "phone": "string",
-            "details": "string"
+            "id": "yrKHjswp1A",
+            "firstName": "Grace",
+            "lastName": "Lee",
+            "email": "tardif.annie@hotmail.com",
+            "phone": "+1-275-209-2039",
+            "company": "Dion S.A."
+        },
+        {
+            "id": "O8DEWliwGS",
+            "firstName": "Alexander",
+            "lastName": "Davis",
+            "email": "denise.rioux@gmail.com",
+            "phone": "903-380-1653",
+            "company": "Dubois"
+        },
+        {
+            "id": "3Gmmclk2cb",
+            "firstName": "Adam",
+            "lastName": "Cote",
+            "email": "tessier.josephine@gmail.com",
+            "phone": "1-953-325-3730",
+            "company": "Parent S.A.R.L."
+        },
+        {
+            "id": "kVA17rsWI6",
+            "firstName": "Liam",
+            "lastName": "Gagne",
+            "email": "arsenault.penelope@hebert.com",
+            "phone": "1-986-804-4036",
+            "company": "St-Pierre SARL"
+        },
+        {
+            "id": "SGx0FKkF0c",
+            "firstName": "Selma",
+            "lastName": "Knutsen",
+            "email": "ktollefsen@ottesen",
+            "phone": "75 99 40 32",
+            "company": "Christiansen & Haaland ANS"
+        },
+        {
+            "id": "YjvCzcXxgh",
+            "firstName": "Mathilde",
+            "lastName": "Fredriksen",
+            "email": "tgabrielsen@ali.biz",
+            "phone": "+47035643106",
+            "company": "Gjerde NUF"
+        },
+        {
+            "id": "mFVahgJNCK",
+            "firstName": "Markus",
+            "lastName": "Rasmussen",
+            "email": "oien.osman@mathisen.info",
+            "phone": "988 46 688",
+            "company": "Lie & Amundsen ASA"
+        },
+        {
+            "id": "vjPhKOzwnW",
+            "firstName": "Valentine",
+            "lastName": "Roche",
+            "email": "cousin.thierry@orange.fr",
+            "phone": "+33 (0)5 81 43 07 65",
+            "company": "Gomez Legendre SA"
+        },
+        {
+            "id": "GQ9s5SKjLg",
+            "firstName": "Sofia",
+            "lastName": "Mattsson",
+            "email": "hoj.lena@live.dk",
+            "phone": "+45 5356 2001",
+            "company": "Fischer og Haugaard ApS"
         }
     ]
 }
