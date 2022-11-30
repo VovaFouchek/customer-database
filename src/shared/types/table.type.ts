@@ -1,5 +1,5 @@
 export type TColumn = {
-	id: 'firstName' | 'lastName' | 'email' | 'phone' | 'details';
+	id: 'firstName' | 'lastName' | 'email' | 'phone' | 'company';
 	label: string;
 	minWidth?: number;
 	align?: 'right' | 'left' | 'center';
@@ -7,10 +7,10 @@ export type TColumn = {
 };
 
 export type TCustomer = {
-	id: number;
+	id: string;
 	firstName: string;
 	lastName: string;
 	email: string;
 	phone: string | number;
-	details: string;
+	company: string;
 };

@@ -11,21 +11,22 @@ import {
     TableRow
 } from "@mui/material";
 
-import { useCustomers } from "../../../../hooks/customers";
+import useCustomers from "../../../../hooks/customers";
 import { TColumn, TCustomer } from "../../../../shared/types/table.type";
+import Loader from "../Loader";
 
 const columns: readonly TColumn[] = [
-    { id: 'firstName', label: 'First Name', minWidth: 170 },
-    { id: 'lastName', label: 'Last Name', minWidth: 170 },
+    { id: 'firstName', label: 'First Name', minWidth: 150 },
+    { id: 'lastName', label: 'Last Name', minWidth: 150 },
     { id: 'email', label: 'Email', minWidth: 170, },
     { id: 'phone', label: 'Phone', minWidth: 170, },
-    { id: 'details', label: 'Details', minWidth: 170, },
+    { id: 'company', label: 'Company', minWidth: 170, },
 ];
 
 const Board = (): JSX.Element => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-    const { customers, loading, error } = useCustomers();
+    const { customers, loading } = useCustomers();
 
     const rowsPerPageOptions = [5, 10, 15];
 
@@ -77,6 +78,7 @@ const Board = (): JSX.Element => {
                     </TableBody>
                 </Table>
             </TableContainer>
+            {loading && <Loader />}
             <TablePagination
                 rowsPerPageOptions={rowsPerPageOptions}
                 component="div"

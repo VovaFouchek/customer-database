@@ -1,24 +1,28 @@
 import { useEffect, useState } from 'react';
 
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 
 import { API } from '../shared/api/config/customers.api';
 import { TCustomer } from '../shared/types/table.type';
 
-export const useCustomers = () => {
+const useCustomers = () => {
 	const [customers, setCustomers] = useState<TCustomer[]>([]);
 	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState('');
 
 	const fetchCustomers = async () => {
 		try {
-			const response = await axios.get<TCustomer[]>(API.CUSTOMERS);
-			setCustomers(response.data);
-			setLoading(false);
+			// * imitation delay for request from server
+			setTimeout(async () => {
+				const response = await axios.get<TCustomer[]>(API.CUSTOMERS);
+				setCustomers(response.data);
+				setLoading(false);
+			}, 500);
 		} catch (error) {
-			const errorRequest = error as AxiosError;
-			setLoading(false);
-			setError(errorRequest.message);
+			let errorMessage = 'Failed to do something exceptional';
+			if (error instanceof Error) {
+				errorMessage = error.message;
+			}
+			console.log(errorMessage);
 		}
 	};
 
@@ -26,5 +30,7 @@ export const useCustomers = () => {
 		fetchCustomers();
 	});
 
-	return { customers, loading, error };
+	return { customers, loading };
 };
+
+export default useCustomers;
