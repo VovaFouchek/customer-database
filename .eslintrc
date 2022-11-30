@@ -15,7 +15,7 @@
 		"@typescript-eslint/no-unused-vars": "warn",
 		"@typescript-eslint/consistent-type-definitions": ["error", "type"],
 		"import/extensions": [
-			"error",
+			"warn",
 			"ignorePackages",
 			{
 				"js": "never",
@@ -24,12 +24,32 @@
 				"tsx": "never"
 			}
 		],
-		"import/no-unresolved": "off"
+		"import/no-unresolved": "off",
+		"import/order": [
+			"warn",
+			{
+				"groups": ["builtin", "external", "internal"],
+				"pathGroups": [
+					{
+						"pattern": "react",
+						"group": "external",
+						"position": "before"
+					}
+				],
+				"pathGroupsExcludedImportTypes": ["react"],
+				"newlines-between": "always",
+				"alphabetize": {
+					"order": "asc",
+					"caseInsensitive": true
+				}
+			}
+		]
 	},
 	"settings": {
 		"import/resolver": {
 			"node": {
-				"extensions": [".js", ".jsx", ".ts", ".tsx"]
+				"extensions": [".js", ".jsx", ".ts", ".tsx"],
+				"moduleDirectory": ["node_modules", "src/"]
 			}
 		}
 	},
