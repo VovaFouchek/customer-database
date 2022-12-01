@@ -1,8 +1,24 @@
+import { Button, TextField } from '@mui/material';
+import axios from 'axios';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-export const SimpleForm = (): JSX.Element => {
+import { API } from '../../../../shared/api/config/customers.api';
+import { TCustomer } from '../../../../shared/types/table.type';
+
+import './index.scss';
+
+type CreateCustomerProps = {
+    onCreate: (customer: TCustomer) => void;
+    onCloseWindow: () => void;
+};
+
+const SimpleForm = ({ onCreate, onCloseWindow }: CreateCustomerProps): JSX.Element => {
+    // * format of phone: +00000000
     const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
+    const style = {
+        marginBottom: "15px",
+    };
 
     const formik = useFormik({
         initialValues: {
@@ -12,90 +28,108 @@ export const SimpleForm = (): JSX.Element => {
             phone: '',
             company: ''
         },
+
         validationSchema: Yup.object({
             firstName: Yup.string()
-                .max(15, 'Must be 15 characters or less')
+                .max(20, 'Must be 20 characters or less')
                 .required('Required'),
             lastName: Yup.string()
                 .max(20, 'Must be 20 characters or less')
                 .required('Required'),
-            email: Yup.string().email('Invalid email address').required('Required'),
-            phone: Yup.string().required('Required').matches(phoneRegExp, 'Phone number is not valid'),
-            company: Yup.string().required('Required').max(15, 'Must be 15 characters or less')
+            email: Yup.string()
+                .required('Required')
+                .email('Invalid email address')
+                .max(30, 'Must be 30 characters or less'),
+            phone: Yup.string()
+                .required('Required')
+                .matches(phoneRegExp, 'Phone number is not valid'),
+            company: Yup.string()
+                .required('Required')
+                .max(30, 'Must be 30 characters or less')
         }),
-        onSubmit: values => {
-            console.log(values);
-            alert(JSON.stringify(values, null, 5));
+
+        onSubmit: async (values: TCustomer) => {
+            const customerData = values;
+            const response = await axios.post<TCustomer>(API.CUSTOMERS, customerData);
+            onCreate(response.data);
+            onCloseWindow()
         },
     });
     return (
         <form onSubmit={formik.handleSubmit}>
-            <label htmlFor="firstName">First Name</label>
-            <input
-                id="firstName"
+            <TextField id="firstName"
                 name="firstName"
                 type="text"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.firstName}
-            />
+                label="First Name"
+                variant="standard"
+                sx={style} />
+
             {formik.touched.firstName && formik.errors.firstName ? (
-                <div>{formik.errors.firstName}</div>
+                <div className='error'>{formik.errors.firstName}</div>
             ) : null}
 
-            <label htmlFor="lastName">Last Name</label>
-            <input
-                id="lastName"
+            <TextField id="lastName"
                 name="lastName"
                 type="text"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.lastName}
-            />
+                label="Last Name"
+                variant="standard"
+                sx={style} />
+
             {formik.touched.lastName && formik.errors.lastName ? (
-                <div>{formik.errors.lastName}</div>
+                <div className='error'>{formik.errors.lastName}</div>
             ) : null}
 
-            <label htmlFor="email">Email Address</label>
-            <input
-                id="email"
+            <TextField id="email"
                 name="email"
-                type="email"
+                type="text"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.email}
-            />
+                label="Email Address"
+                variant="standard"
+                sx={style} />
+
             {formik.touched.email && formik.errors.email ? (
-                <div>{formik.errors.email}</div>
+                <div className='error'>{formik.errors.email}</div>
             ) : null}
 
-            <label htmlFor="phone">Phone</label>
-            <input
-                id="phone"
+            <TextField id="phone"
                 name="phone"
                 type="text"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.phone}
-            />
+                label="Phone"
+                variant="standard"
+                sx={style} />
+
             {formik.touched.phone && formik.errors.phone ? (
-                <div>{formik.errors.phone}</div>
+                <div className='error'>{formik.errors.phone}</div>
             ) : null}
 
-            <label htmlFor="company">Company</label>
-            <input
-                id="company"
+            <TextField id="company"
                 name="company"
                 type="text"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.company}
-            />
+                label="Company"
+                variant="standard"
+                sx={style} />
+
             {formik.touched.company && formik.errors.company ? (
-                <div>{formik.errors.company}</div>
+                <div className='error'>{formik.errors.company}</div>
             ) : null}
 
-            <button type="submit">Submit</button>
+            <Button type="submit" variant="contained" sx={{ mt: "30px" }}>Submit</Button>
         </form>
     );
 };
+
+export default SimpleForm;

@@ -7,7 +7,7 @@ export type TColumn = {
 };
 
 export type TCustomer = {
-	id: string;
+	id?: string;
 	firstName: string;
 	lastName: string;
 	email: string;

@@ -2,7 +2,7 @@ import Home from './pages/Home';
 
 import './index.scss';
 
-const App = () => {
+const App = (): JSX.Element => {
   return (
     <div className="App">
       <Home />

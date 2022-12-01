@@ -27,14 +27,11 @@ const columns: readonly TColumn[] = [
 const Board = (): JSX.Element => {
     const [page, setPage] = useState<number>(0);
     const [rowsPerPage, setRowsPerPage] = useState<number>(10);
-    const { customers, loading } = useCustomers();
+    const { customers, addCustomer, loading } = useCustomers();
+    const rowsPerPageOptions: number[] = [5, 10, 15];
 
-    const rowsPerPageOptions = [5, 10, 15];
-
-    const handleChangePage = (event: unknown, newPage: number) => {
-        setPage(newPage);
-    };
-
+    const createHandler = (customer: TCustomer) => addCustomer(customer);
+    const handleChangePage = (event: unknown, newPage: number) => setPage(newPage);
     const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
         setRowsPerPage(+event.target.value);
         setPage(0);
@@ -91,7 +88,7 @@ const Board = (): JSX.Element => {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Paper>
-            <BasicModal />
+            <BasicModal createHandler={createHandler} />
         </>
     );
 }

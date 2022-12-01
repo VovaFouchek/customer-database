@@ -9,6 +9,10 @@ const useCustomers = () => {
 	const [customers, setCustomers] = useState<TCustomer[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
 
+	const addCustomer = (customer: TCustomer) => {
+		setCustomers(prev => [...prev, customer]);
+	};
+
 	const fetchCustomers = async () => {
 		try {
 			// * imitation delay for request from server
@@ -30,7 +34,7 @@ const useCustomers = () => {
 		fetchCustomers();
 	});
 
-	return { customers, loading };
+	return { customers, addCustomer, loading };
 };
 
 export default useCustomers;
