@@ -13,6 +13,7 @@ import {
 
 import useCustomers from "../../../../hooks/customers";
 import { TColumn, TCustomer } from "../../../../shared/types/table.type";
+import BasicModal from "../BasicModal";
 import Loader from "../Loader";
 
 const columns: readonly TColumn[] = [
@@ -24,8 +25,8 @@ const columns: readonly TColumn[] = [
 ];
 
 const Board = (): JSX.Element => {
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [page, setPage] = useState<number>(0);
+    const [rowsPerPage, setRowsPerPage] = useState<number>(10);
     const { customers, loading } = useCustomers();
 
     const rowsPerPageOptions = [5, 10, 15];
@@ -40,55 +41,58 @@ const Board = (): JSX.Element => {
     };
 
     return (
-        <Paper elevation={3} sx={{ width: '100%', overflow: 'hidden' }}>
-            <TableContainer sx={{ maxHeight: 440 }}>
-                <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                        <TableRow>
-                            {columns.map((column) => (
-                                <TableCell
-                                    key={column.id}
-                                    align={column.align}
-                                    style={{ minWidth: column.minWidth }}
-                                >
-                                    {column.label}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {customers
-                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .map((customers: TCustomer) => {
-                                return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={customers.id}>
-                                        {columns.map((column) => {
-                                            const value = customers[column.id];
-                                            return (
-                                                <TableCell key={column.id} align={column.align}>
-                                                    {column.format && typeof value === 'number'
-                                                        ? column.format(value)
-                                                        : value}
-                                                </TableCell>
-                                            );
-                                        })}
-                                    </TableRow>
-                                );
-                            })}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            {loading && <Loader />}
-            <TablePagination
-                rowsPerPageOptions={rowsPerPageOptions}
-                component="div"
-                count={customers.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-        </Paper>
+        <>
+            <Paper elevation={3} sx={{ width: '100%', overflow: 'hidden' }}>
+                <TableContainer sx={{ maxHeight: 440 }}>
+                    <Table stickyHeader aria-label="sticky table">
+                        <TableHead>
+                            <TableRow>
+                                {columns.map((column) => (
+                                    <TableCell
+                                        key={column.id}
+                                        align={column.align}
+                                        style={{ minWidth: column.minWidth }}
+                                    >
+                                        {column.label}
+                                    </TableCell>
+                                ))}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {customers
+                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                .map((customers: TCustomer) => {
+                                    return (
+                                        <TableRow hover role="checkbox" tabIndex={-1} key={customers.id}>
+                                            {columns.map((column) => {
+                                                const value = customers[column.id];
+                                                return (
+                                                    <TableCell key={column.id} align={column.align}>
+                                                        {column.format && typeof value === 'number'
+                                                            ? column.format(value)
+                                                            : value}
+                                                    </TableCell>
+                                                );
+                                            })}
+                                        </TableRow>
+                                    );
+                                })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                {loading && <Loader />}
+                <TablePagination
+                    rowsPerPageOptions={rowsPerPageOptions}
+                    component="div"
+                    count={customers.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+            </Paper>
+            <BasicModal />
+        </>
     );
 }
 

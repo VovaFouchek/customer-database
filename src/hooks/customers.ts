@@ -7,7 +7,7 @@ import { TCustomer } from '../shared/types/table.type';
 
 const useCustomers = () => {
 	const [customers, setCustomers] = useState<TCustomer[]>([]);
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState<boolean>(true);
 
 	const fetchCustomers = async () => {
 		try {
